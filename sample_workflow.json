@@ -1,0 +1,14 @@
+{
+  "name": "نمونه ورک‌فلو تست",
+  "active": true,
+  "nodes": [
+    {"id":"1","name":"Webhook Trigger","type":"n8n-nodes-base.webhook","typeVersion":1,"position":[250,300],"parameters":{"path":"test-hook"}},
+    {"id":"2","name":"IF Check","type":"n8n-nodes-base.if","typeVersion":1,"position":[450,300],"parameters":{"conditions":{}}},
+    {"id":"3","name":"HTTP Request","type":"n8n-nodes-base.httpRequest","typeVersion":3,"position":[650,200],"parameters":{"url":"https://api.example.com","headerParameters":{"parameters":[{"name":"Authorization","value":"Bearer secrettoken123"}]}},"credentials":{"httpHeaderAuth":{"id":"5","name":"My Auth"}}},
+    {"id":"4","name":"Set Data","type":"n8n-nodes-base.set","typeVersion":2,"position":[650,400],"parameters":{"values":{}}}
+  ],
+  "connections": {
+    "Webhook Trigger": {"main": [[{"node":"IF Check","type":"main","index":0}]]},
+    "IF Check": {"main": [[{"node":"HTTP Request","type":"main","index":0}],[{"node":"Set Data","type":"main","index":0}]]}
+  }
+}
